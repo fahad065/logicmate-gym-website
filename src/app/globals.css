@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f6f8;
+  --foreground: #14161a;
+
+  --brand-volt: #c6ff2e;
+  --brand-volt-dark: #a0d600;
+  --brand-dark: #0c0e11;
+  --brand-dark-soft: #191c21;
+  --brand-steel: #4b5563;
+  --brand-red: #ef4444;
+  --brand-cream: #f5f6f8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-volt: var(--brand-volt);
+  --color-volt-dark: var(--brand-volt-dark);
+  --color-ink: var(--brand-dark);
+  --color-ink-soft: var(--brand-dark-soft);
+  --color-steel: var(--brand-steel);
+  --color-danger: var(--brand-red);
+  --color-cream: var(--brand-cream);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 46, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(198, 255, 46, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(198, 255, 46, 0);
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.2s infinite;
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }

@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Forge Fitness — Demo Gym Website
 
-## Getting Started
+A standalone, frontend-only Next.js demo site built to showcase the LogicMate
+chatbot widget on a realistic gym/fitness brand. **This is not a real
+business** — content, trainers, classes, locations, phone numbers and quotes
+are illustrative, built to look like a real, live gym chain site for demo
+purposes only.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS v4
+- `lucide-react` + `react-icons/fa` for icons
+- `Bebas Neue` (display/headings) + `Inter` (body) via `next/font/google`
+- No backend, no database, no API calls — every page is static, all content
+  lives in `src/data/*.ts`. Forms (Join / Free Trial, Contact) simulate a
+  network request and show a success state, but submit nowhere.
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` — Home
+- `/classes` — Full class catalog (12 class types, category filters) + weekly schedule table
+- `/trainers` — Coaching staff bios
+- `/membership` — Basic / Pro / Elite pricing, add-ons, FAQ
+- `/locations` — All 5 Austin-area branches, filterable by area
+- `/about` — Brand story, values, timeline
+- `/join` — Free trial signup form (mock submit)
+- `/contact` — Contact form (mock submit)
 
-## Learn More
+## Adding the LogicMate chatbot widget
 
-To learn more about Next.js, take a look at the following resources:
+Open `src/app/layout.tsx` and find the commented placeholder inside `<head>`.
+Paste the `<script>` snippet from your chatbot's **Channels → Website** tab
+right there — it self-injects a floating chat bubble, nothing else on the
+page needs to change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```tsx
+<script>
+  window.LMChatbot = { embedKey: "YOUR_EMBED_KEY", ... };
+</script>
+<script src="https://YOUR-FRONTEND-DOMAIN/chatbot-widget.js" async></script>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Images are hotlinked from Unsplash and gracefully fall back to a branded
+  dark gradient placeholder (`src/components/safe-img.tsx`) if a URL ever
+  fails to load — verify these render correctly on the machine you're
+  demoing from.
+- All classes, trainers, pricing, locations, addresses and phone numbers are
+  fabricated for demo purposes.
